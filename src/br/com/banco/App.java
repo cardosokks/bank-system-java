@@ -7,7 +7,7 @@ public class App {
         Bank santander = new Bank("0001");
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("Contas online: " + santander.outputContagemContas());
+            System.out.println("Contas Criadas: " + santander.outputContagemContas());
             System.out.println("Dinheiro armazenado no banco: R$ " + santander.outputTotal());
             System.out.println("Oque deseja fazer?\nCRIAR CONTA = C\nLISTAR CONTAS = L\nSAIR = E");
             System.out.println("----------------------------");
@@ -24,7 +24,8 @@ public class App {
                 if(accountList.isEmpty()){
                     System.out.println("Ainda não foram criadas contas neste banco.");
                 }else {
-                    System.out.println("--------- CONTAS ------------");
+                    System.out.println("------------ CONTAS ------------");
+                    System.out.println("---[AGENCY]---[NAME]---[CA$H]---");
                     for (Account cc : accountList) {
                         System.out.println(cc);
                     }

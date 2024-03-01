@@ -27,23 +27,33 @@ public class Account {
         }
     }
 
-    public void sacar(Double value){
-        if(balance < value){
-            logger.out("ERRO - Não é possível sacar R$ " + value + ".Disponível na conta: R$" + balance );
-        }else{
-            balance -= value;
-            logger.out("SAQUE - R$" + value + "- Total na conta:R$ " + balance);
+    public void sacar(Double value) {
+        try {
+            if (value <= 0) {
+                logger.out("ERRO - Valor inválido para saque: " + value);
+            } else if (balance < value) {
+                logger.out("ERRO - Não é possível sacar R$ " + value + ".Disponível na conta: R$" + balance);
+            } else {
+                balance -= value;
+                logger.out("SAQUE - R$" + value + "- Total na conta:R$ " + balance);
+            }
+        } catch (NumberFormatException e){
+            logger.out("ERRO - Valor inválido para saque: " + value);
         }
     }
 
     public void deposit(Double value){
-        if(value <= 0){
-            logger.out("Valor inválido, tente novamente");
-        } else{
-            balance += value;
-            logger.out("DEPOSITO - R$" + value + "- Total na conta:R$ " + balance);
-        }
+        try {
+            if (value <= 0) {
+                logger.out("Valor inválido, tente novamente");
 
+            } else {
+                balance += value;
+                logger.out("DEPOSITO - R$" + value + "- Total na conta:R$ " + balance);
+            }
+        }catch (NumberFormatException e){
+                logger.out("ERRO - Valor inválido para Deposito: " + value);
+            }
     }
 
     public double getBalance(){
@@ -52,6 +62,6 @@ public class Account {
 
     @Override
     public String toString() {
-        return "A conta " + name + " " + ag +"/" + cc + " possui R$ " + balance;
+        return ag + "/" + cc + " - " + name + " - " +"CARTEIRA: R$ " + balance;
     }
 }

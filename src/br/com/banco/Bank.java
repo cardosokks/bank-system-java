@@ -36,11 +36,16 @@ public class Bank {
         return total;
     }
 
-    public int outputContagemContas(){
+    public String outputContagemContas(){
         int contas = 0;
         for(Account account: accounts){
             contas ++;
         }
-        return contas;
+        if(contas == 0){
+            String msg = "Nenhuma conta criada";
+            return msg;
+        }else {
+            return Integer.toString(contas);
+        }
     }
 }
