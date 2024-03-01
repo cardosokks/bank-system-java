@@ -28,7 +28,7 @@ public class App {
                     for (Account cc : accountList) {
                         System.out.println(cc);
                     }
-                    System.out.println("----------------------------");
+                    System.out.println("-----------------------------");
                 }
             } else if (op.equals("E")) {
                 break;
