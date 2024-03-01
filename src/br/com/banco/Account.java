@@ -1,7 +1,5 @@
 package br.com.banco;
 
-import java.util.Objects;
-
 public class Account {
 
     private static final int MAX_LENGTH = 12; // propriedade constante, onde o valor não muda. "FINAL"
