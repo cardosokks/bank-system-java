@@ -33,4 +33,13 @@ public class BankService {
     public int outputContagemContas(BankDTO bankDTO) {
         return bankDTO.getAccounts().size();
     }
+
+    public AccountDTO findByName(BankDTO santander, String nameAccount) {
+        for(AccountDTO account: santander.getAccounts()){
+            if(account.getName().equalsIgnoreCase(nameAccount)){
+                return account;
+            }
+        }
+        return null;
+    }
 }

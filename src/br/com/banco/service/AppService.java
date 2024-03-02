@@ -20,13 +20,13 @@ public class AppService {
             System.out.print("Contas Criadas: ");
 
             if (contagemContas == 0) {
-                System.out.println("Nenhuma conta criada ");
+                System.out.println("Nenhuma conta criada.");
             } else {
                 System.out.println(contagemContas);
             }
 
             System.out.println("Dinheiro armazenado no banco: R$ " + bankService.outputTotal(santander));
-            System.out.println("Oque deseja fazer?\nCRIAR CONTA = C\nLISTAR CONTAS = L\nSAIR = E");
+            System.out.println("Oque deseja fazer?\nCRIAR CONTA = C\nLISTAR CONTAS = L\nENTRAR EM UMA CONTA = E \nSAIR = S");
             System.out.println("----------------------------");
             String op = scanner.nextLine();
 
@@ -50,7 +50,18 @@ public class AppService {
                     }
                     System.out.println("-----------------------------");
                 }
-            } else if (op.equalsIgnoreCase("E")) {
+            }else if(op.equalsIgnoreCase("E")){
+                System.out.println("Em qual conta deseja entrar?");
+                String nomeConta = scanner.nextLine();
+                AccountDTO accountDTO = bankService.findByName(santander, nomeConta);
+                if(accountDTO != null){
+                    OperateAccount(accountDTO);
+                }else {
+                    System.out.println("Conta não encontrada");
+                }
+
+
+            } else if (op.equalsIgnoreCase("S")) {
                 break;
             } else {
                 System.out.println("Comando Inválido");

@@ -9,7 +9,7 @@ public class AccountDTO {
     private String name;
     private Double balance = 0.0;
 
-    public AccountDTO(String agencia, String conta, String nome){
+    public AccountDTO(String agencia, String conta, String nome) {
         this.ag = agencia;
         this.cc = conta;
         setName(nome);
@@ -40,19 +40,19 @@ public class AccountDTO {
     }
 
     public void setName(String name) {
-        if(name.length() > MAX_LENGTH){
+        if (name.length() > MAX_LENGTH) {
             this.name = name.substring(0, MAX_LENGTH);
         } else {
             this.name = name;
         }
     }
 
-    public double getBalance(){
+    public double getBalance() {
         return balance;
     }
 
     @Override
     public String toString() {
-        return ag + "/" + cc + " - " + name + " - " +"CARTEIRA: R$ " + balance;
+        return ag + "/" + cc + " - " + name + " - " + "CARTEIRA: R$ " + String.format("%.2f", balance);
     }
 }

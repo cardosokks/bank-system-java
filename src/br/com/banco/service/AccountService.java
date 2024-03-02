@@ -18,25 +18,28 @@ public class AccountService {
                 } else {
                     accountDTO.setBalance(balance - value);
 
-                    logger.out("SAQUE - R$" + value + "- Total na conta:R$ " + accountDTO.getBalance());
+                    logger.out("SAQUE - R$" + value + "- Total na conta:R$ " + String.format("%.2f", accountDTO.getBalance()));
                 }
             }
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             logger.out("ERRO - Valor inválido para saque: " + value);
         }
     }
 
-    public void deposit(AccountDTO accountDTO, Double value){
+    public void deposit(AccountDTO accountDTO, Double value) {
         try {
-            if (value <= 0) {
+            if (value <= 0 || value > Double.MAX_VALUE) {
                 logger.out("Valor inválido, tente novamente");
 
             } else {
-//                balance += value;
-                accountDTO.setBalance(accountDTO.getBalance() + value);
-                logger.out("DEPOSITO - R$" + value + "- Total na conta:R$ " + accountDTO.getBalance());
+                if (accountDTO.getBalance() + value > Double.MAX_VALUE) {
+                    System.out.println("Nao recebemos mais dinheiro aqui nessa peste. NAO CABE MANO");
+                } else {
+                    accountDTO.setBalance(accountDTO.getBalance() + value);
+                    logger.out("DEPOSITO - R$" + value + "- Total na conta:R$ " + String.format("%.2f", accountDTO.getBalance()));
+                }
             }
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             logger.out("ERRO - Valor inválido para Deposito: " + value);
         }
     }
