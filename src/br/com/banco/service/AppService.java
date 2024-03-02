@@ -1,37 +1,56 @@
-package br.com.banco;
+package br.com.banco.service;
+
+import br.com.banco.dto.AccountDTO;
+import br.com.banco.dto.BankDTO;
+
 import java.util.List;
 import java.util.Scanner;
 
-public class App {
-    public static void main(String[] args) {
-        Bank santander = new Bank("0001");
+public class AppService {
+
+    BankService bankService = new BankService();
+    AccountService accountService = new AccountService();
+
+    public void inicializar() {
+        BankDTO santander = new BankDTO("0001");
         Scanner scanner = new Scanner(System.in);
+
         while (true) {
-            System.out.println("Contas Criadas: " + santander.outputContagemContas());
-            System.out.println("Dinheiro armazenado no banco: R$ " + santander.outputTotal());
+            int contagemContas = bankService.outputContagemContas(santander);
+            System.out.print("Contas Criadas: ");
+
+            if (contagemContas == 0) {
+                System.out.println("Nenhuma conta criada ");
+            } else {
+                System.out.println(contagemContas);
+            }
+
+            System.out.println("Dinheiro armazenado no banco: R$ " + bankService.outputTotal(santander));
             System.out.println("Oque deseja fazer?\nCRIAR CONTA = C\nLISTAR CONTAS = L\nSAIR = E");
             System.out.println("----------------------------");
             String op = scanner.nextLine();
-            if (op.equals("C")) {
+
+
+            if (op.equalsIgnoreCase("C")) {
                 System.out.println("Digite o seu nome.");
                 System.out.println("----------------------------");
                 String name = scanner.nextLine();
-                Account account = santander.generateAccount(name);
-                santander.insertAccount(account);
-                OperateAccount(account);
-            }else if(op.equals("L")){
-                List<Account> accountList = santander.getAccounts();
-                if(accountList.isEmpty()){
+                AccountDTO accountDTO = bankService.generateAccount(santander, name);
+                bankService.insertAccount(accountDTO, santander);
+                OperateAccount(accountDTO);
+            } else if (op.equalsIgnoreCase("L")) {
+                List<AccountDTO> accountDTOList = santander.getAccounts();
+                if (accountDTOList.isEmpty()) {
                     System.out.println("Ainda não foram criadas contas neste banco.");
-                }else {
+                } else {
                     System.out.println("------------ CONTAS ------------");
                     System.out.println("---[AGENCY]---[NAME]---[CA$H]---");
-                    for (Account cc : accountList) {
+                    for (AccountDTO cc : accountDTOList) {
                         System.out.println(cc);
                     }
                     System.out.println("-----------------------------");
                 }
-            } else if (op.equals("E")) {
+            } else if (op.equalsIgnoreCase("E")) {
                 break;
             } else {
                 System.out.println("Comando Inválido");
@@ -39,34 +58,36 @@ public class App {
         }
     }
 
-    static void OperateAccount(Account account){
+    public void OperateAccount(AccountDTO accountDTO) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Bem Vindo ao Banco Santander");
         System.out.println("----------------------------");
-        while(true) {
-            System.out.println(account.toString());
+
+        while (true) {
+            System.out.println(accountDTO.toString());
             System.out.println("----------------------------");
             System.out.println("Oque deseja fazer? \nDEPOSITAR = D\nSACAR = S\nSAIR = E");
             System.out.println("----------------------------");
             String op = scanner.nextLine();
-            if (op.equals("S")) {
+
+            if (op.equalsIgnoreCase("S")) {
                 System.out.println("Digite um valor para sacar //");
-                System.out.println("Disponível para saque:" + account.getBalance());
+                System.out.println("Disponível para saque:" + accountDTO.getBalance());
                 Double value = scanner.nextDouble();
                 scanner.nextLine();
-                account.sacar(value);
-            } else if (op.equals("D")) {
+                accountService.sacar(accountDTO, value);
+            } else if (op.equalsIgnoreCase("D")) {
                 System.out.println("Digite o valor que deseja depositar");
                 Double value2 = scanner.nextDouble();
                 scanner.nextLine();
-                account.deposit(value2);
-            } else if (op.equals("E")) {
+                accountService.deposit(accountDTO, value2);
+            } else if (op.equalsIgnoreCase("E")) {
                 break;
             } else {
                 System.out.println("Comando inválido, tente novamente.");
             }
-        }
 
+        }
 
     }
 }

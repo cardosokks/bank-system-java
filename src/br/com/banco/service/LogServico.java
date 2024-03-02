@@ -1,6 +1,6 @@
-package br.com.banco;
+package br.com.banco.service;
 
-public class Log {
+public class LogServico {
     public void out(String message){
         System.out.println("LOG:" + message);
     }
