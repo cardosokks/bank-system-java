@@ -25,7 +25,7 @@ public class AppService {
                 System.out.println(contagemContas);
             }
 
-            System.out.println("Dinheiro armazenado no banco: R$ " + bankService.outputTotal(santander));
+            System.out.println("Dinheiro armazenado no banco: R$ " + String.format("%.2f", bankService.outputTotal(santander)));
             System.out.println("Oque deseja fazer?\nCRIAR CONTA = C\nLISTAR CONTAS = L\nENTRAR EM UMA CONTA = E \nSAIR = S");
             System.out.println("----------------------------");
             String op = scanner.nextLine();
@@ -83,7 +83,7 @@ public class AppService {
 
             if (op.equalsIgnoreCase("S")) {
                 System.out.println("Digite um valor para sacar //");
-                System.out.println("Disponível para saque:" + accountDTO.getBalance());
+                System.out.println("Disponível para saque:" + String.format("%.2f", accountDTO.getBalance()));
                 Double value = scanner.nextDouble();
                 scanner.nextLine();
                 accountService.sacar(accountDTO, value);

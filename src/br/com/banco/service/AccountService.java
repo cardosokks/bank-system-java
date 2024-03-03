@@ -9,12 +9,12 @@ public class AccountService {
     public void sacar(AccountDTO accountDTO, Double value) {
         try {
             if (value <= 0) {
-                logger.out("ERRO - Valor inválido para saque: " + value);
+                logger.out("ERRO - Valor inválido para saque: " + String.format("%.2f", value));
             } else {
                 double balance = accountDTO.getBalance();
 
                 if (balance < value) {
-                    logger.out("ERRO - Não é possível sacar R$ " + value + ".Disponível na conta: R$" + balance);
+                    logger.out("ERRO - Não é possível sacar R$ " + String.format("%.2f", value) + ".Disponível na conta: R$" + String.format("%.2f", balance));
                 } else {
                     accountDTO.setBalance(balance - value);
 
@@ -36,7 +36,7 @@ public class AccountService {
                     System.out.println("Nao recebemos mais dinheiro aqui nessa peste. NAO CABE MANO");
                 } else {
                     accountDTO.setBalance(accountDTO.getBalance() + value);
-                    logger.out("DEPOSITO - R$" + value + "- Total na conta:R$ " + String.format("%.2f", accountDTO.getBalance()));
+                    logger.out("DEPOSITO - R$" + String.format("%.2f", value) + "- Total na conta:R$ " + String.format("%.2f", accountDTO.getBalance()));
                 }
             }
         } catch (NumberFormatException e) {
