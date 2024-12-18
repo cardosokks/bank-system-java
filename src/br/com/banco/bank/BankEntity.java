@@ -1,14 +1,20 @@
-package br.com.banco.dto;
+package br.com.banco.bank;
+
+import br.com.banco.account.AccountDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BankDTO {
+public class BankEntity {
     private String ag;
     private List<AccountDTO> accountDTOS;
     private int lastAccount = 1;
 
-    public BankDTO(String ag){
+
+    public BankEntity() {
+    }
+
+    public BankEntity(String ag) {
         this.ag = ag;
         this.accountDTOS = new ArrayList<>();
     }

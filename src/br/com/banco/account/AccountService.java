@@ -1,10 +1,10 @@
-package br.com.banco.service;
+package br.com.banco.account;
 
-import br.com.banco.dto.AccountDTO;
+import br.com.banco.tools.LogService;
 
 public class AccountService {
 
-    private final LogServico logger = new LogServico();
+    private final LogService logger = new LogService();
 
     public void sacar(AccountDTO accountDTO, Double value) {
         try {

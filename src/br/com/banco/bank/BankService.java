@@ -1,7 +1,6 @@
-package br.com.banco.service;
+package br.com.banco.bank;
 
-import br.com.banco.dto.AccountDTO;
-import br.com.banco.dto.BankDTO;
+import br.com.banco.account.AccountDTO;
 
 import java.util.List;
 

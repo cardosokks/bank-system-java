@@ -1,8 +1,8 @@
-package br.com.banco.dto;
+package br.com.banco.account;
 
 public class AccountDTO {
 
-    private static final int MAX_LENGTH = 12; // propriedade constante, onde o valor não muda. "FINAL"
+    private static final int MAX_LENGTH = 30;
 
     private String ag;
     private String cc;
