@@ -2,6 +2,14 @@
 
 Primeiro projeto criado em java.
 
+Funções:
+- Criar Conta
+- Entrar em conta Existente
+- Listar Contas
+- Mostrar Saldo
+- Depositar valor
+- Pix
+
 
 ## Pré-requisitos
 
