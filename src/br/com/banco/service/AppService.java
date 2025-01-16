@@ -12,9 +12,10 @@ public class AppService {
 
     BankService bankService = new BankService();
     AccountService accountService = new AccountService();
+    BankDTO santander = new BankDTO("0001");
 
     public void inicializar() {
-        BankDTO santander = new BankDTO("0001");
+
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -37,7 +38,10 @@ public class AppService {
                 System.out.println("Digite o seu nome.");
                 System.out.println("----------------------------");
                 String name = scanner.nextLine();
-                AccountDTO accountDTO = bankService.generateAccount(santander, name);
+                System.out.println("Digite seu cpf");
+                System.out.println("----------------------------");
+                String cpf = scanner.nextLine();
+                AccountDTO accountDTO = bankService.generateAccount(santander, name, cpf);
                 bankService.insertAccount(accountDTO, santander);
                 OperateAccount(accountDTO);
             } else if (op.equalsIgnoreCase("L")) {
@@ -53,13 +57,13 @@ public class AppService {
                     System.out.println("-----------------------------");
                 }
             }else if(op.equalsIgnoreCase("E")){
-                System.out.println("Em qual conta deseja entrar?");
+                System.out.println("Digite seu CPF:");
                 String nomeConta = scanner.nextLine();
-                AccountDTO accountDTO = bankService.findByName(santander, nomeConta);
+                AccountDTO accountDTO = bankService.findByCpf(santander, nomeConta);
                 if(accountDTO != null){
                     OperateAccount(accountDTO);
                 }else {
-                    System.out.println("Conta não encontrada");
+                    System.out.println("CPF Inválido: Conta não encontrada");
                 }
 
 
@@ -79,7 +83,7 @@ public class AppService {
         while (true) {
             System.out.println(accountDTO.toString());
             System.out.println("----------------------------");
-            System.out.println("Oque deseja fazer? \nDEPOSITAR = D\nSACAR = S\nSAIR = E");
+            System.out.println("Oque deseja fazer? \nDEPOSITAR = D\nSACAR = S\nPIX = P\nSAIR = E");
             System.out.println("----------------------------");
             String op = scanner.nextLine();
 
@@ -96,6 +100,22 @@ public class AppService {
                 accountService.deposit(accountDTO, value2);
             } else if (op.equalsIgnoreCase("E")) {
                 break;
+            } else if(op.equalsIgnoreCase("P")){
+                AccountDTO contaExiste = null;
+                while(contaExiste == null){
+                    System.out.println("Digite o cpf do destinatário");
+                    String cpf = scanner.nextLine();
+                    contaExiste = bankService.findByCpf(santander, cpf);
+                    if(contaExiste == null){
+                        System.out.println("CPF não encontrado. Tente novamente.");
+                    }
+                }
+                System.out.println("Destinatário: " + contaExiste.getName());
+                System.out.println("Digite o valor a ser enviado.");
+                Double pixValue = scanner.nextDouble();
+                scanner.nextLine();
+                accountService.pix(accountDTO,contaExiste, pixValue);
+
             } else {
                 System.out.println("Comando inválido, tente novamente.");
             }

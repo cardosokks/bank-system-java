@@ -29,11 +29,11 @@ public class AccountService {
     public void deposit(AccountDTO accountDTO, Double value) {
         try {
             if (value <= 0 || value > Double.MAX_VALUE) {
-                logger.out("Valor inválido, tente novamente");
+                logger.out("Valor inválido, tente novamente.");
 
             } else {
                 if (accountDTO.getBalance() + value > Double.MAX_VALUE) {
-                    System.out.println("Nao recebemos mais dinheiro aqui nessa peste. NAO CABE MANO");
+                    logger.out("Nao recebemos mais dinheiro aqui nessa peste. NAO CABE MANO");
                 } else {
                     accountDTO.setBalance(accountDTO.getBalance() + value);
                     logger.out("DEPOSITO - R$" + String.format("%.2f", value) + "- Total na conta:R$ " + String.format("%.2f", accountDTO.getBalance()));
@@ -41,6 +41,26 @@ public class AccountService {
             }
         } catch (NumberFormatException e) {
             logger.out("ERRO - Valor inválido para Deposito: " + value);
+        }
+    }
+
+    public void pix(AccountDTO contaBase, AccountDTO contaDestino, Double value){
+        try{
+            if(value <= 0 || value > Double.MAX_VALUE){
+                logger.out("Valor Inválido, tente novamente.");
+            } else{
+                if(contaBase.getBalance() < value){
+                    logger.out("Saldo Insuficiente. Saldo atual: " + contaBase.getBalance());
+                } else if(contaBase.getCpf().equals(contaDestino.getCpf())){
+                    logger.out("Não é possível fazer essa operação. Conta de destino é igual a conta do Remetente.");
+                } else{
+                contaBase.setBalance(contaBase.getBalance() - value);
+                contaDestino.setBalance(contaDestino.getBalance() + value);
+                logger.out("[PIX]" + String.format("%.2f", value) + "- De:" + contaBase.getName() + " - Para: " + contaDestino.getName());
+                }
+            }
+        } catch (NumberFormatException e){
+            logger.out("ERRO - Valor Inválido para PIX: " + value);
         }
     }
 }

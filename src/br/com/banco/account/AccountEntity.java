@@ -8,14 +8,16 @@ public class AccountEntity {
     private String ag;
     private String cc;
     private String name;
+    private String cpf;
     private Double balance = 0.0;
 
     public AccountEntity(){}
 
-    public AccountEntity(String agency, String account, String name) {
+    public AccountEntity(String agency, String account, String name, String cpf) {
         this.ag = agency;
         this.cc = account;
         this.name = name;
+        this.cpf = cpf;
     }
 
     public String getAg() {
@@ -49,4 +51,13 @@ public class AccountEntity {
     public void setBalance(Double balance) {
         this.balance = balance;
     }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
 }

@@ -7,12 +7,14 @@ public class AccountDTO {
     private String ag;
     private String cc;
     private String name;
+    private String cpf;
     private Double balance = 0.0;
 
-    public AccountDTO(String agencia, String conta, String nome) {
+    public AccountDTO(String agencia, String conta, String name, String cpf) {
         this.ag = agencia;
         this.cc = conta;
-        setName(nome);
+        this.cpf = cpf;
+        setName(name);
     }
 
     public String getAg() {
@@ -49,6 +51,14 @@ public class AccountDTO {
 
     public double getBalance() {
         return balance;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     @Override

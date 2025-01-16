@@ -14,8 +14,8 @@ public class BankService {
         return bankDTO.getAccounts();
     }
 
-    public AccountDTO generateAccount(BankDTO bankDTO, String name) {
-        AccountDTO accountDTO = new AccountDTO(bankDTO.getAg(), "" + bankDTO.getLastAccount(), name);
+    public AccountDTO generateAccount(BankDTO bankDTO, String name, String cpf) {
+        AccountDTO accountDTO = new AccountDTO(bankDTO.getAg(), "" + bankDTO.getLastAccount(), name, cpf);
         bankDTO.setLastAccount(bankDTO.getLastAccount() + 1);
         return accountDTO;
     }
@@ -36,6 +36,15 @@ public class BankService {
     public AccountDTO findByName(BankDTO santander, String nameAccount) {
         for(AccountDTO account: santander.getAccounts()){
             if(account.getName().equalsIgnoreCase(nameAccount)){
+                return account;
+            }
+        }
+        return null;
+    }
+
+    public AccountDTO findByCpf(BankDTO santander, String cpfAccount) {
+        for(AccountDTO account: santander.getAccounts()){
+            if(account.getCpf().equalsIgnoreCase(cpfAccount)){
                 return account;
             }
         }
