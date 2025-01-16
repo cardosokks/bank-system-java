@@ -1,4 +1,4 @@
-# Bank in JAVA - Iniciante
+# Banco(JAVA)
 
 Primeiro projeto criado em java.
 
@@ -22,4 +22,4 @@ Certifique-se de ter instalado em sua máquina:
 
 1. Clone o repositório
    ```sh
-   https://github.com/cardosokks/java_bank.git
+   https://github.com/cardosokks/bank-system-java.git
